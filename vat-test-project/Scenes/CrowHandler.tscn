@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnfv8p4nueajk"]
+
+[ext_resource type="Script" uid="uid://djm0788li5o57" path="res://Scripts/crow_handler.gd" id="1_0hsuo"]
+
+[node name="CrowHandler" type="Node3D"]
+script = ExtResource("1_0hsuo")

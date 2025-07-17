@@ -1,0 +1,18 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bw8up6euwp44j"]
+
+[ext_resource type="Shader" uid="uid://c14bxrhjcabhp" path="res://Shaders/vat_shader.gdshader" id="1_rnpxp"]
+[ext_resource type="Texture2D" uid="uid://l1ym1c3annl4" path="res://Textures/Albedo/Crow/T_Crow_BaseColor.PNG" id="2_q2km4"]
+[ext_resource type="Texture2D" uid="uid://baqxqr7ylohom" path="res://Textures/VATs/Crow/crow atlas.png" id="3_q2km4"]
+[ext_resource type="Texture2D" uid="uid://dtg028muragh2" path="res://Textures/VATs/Crow/crow_nrm_vatlas.png" id="3_v4qp8"]
+
+[resource]
+render_priority = 1
+shader = ExtResource("1_rnpxp")
+shader_parameter/position_atlas = ExtResource("3_q2km4")
+shader_parameter/normal_atlas = ExtResource("3_v4qp8")
+shader_parameter/albedo = ExtResource("2_q2km4")
+shader_parameter/sheen_color = Vector3(0.686, 0.278, 0.788)
+shader_parameter/sheen_color_strength = 0.36
+shader_parameter/scale = 40.0
+shader_parameter/tex_width = 1447.26
+shader_parameter/tex_height = 161.0

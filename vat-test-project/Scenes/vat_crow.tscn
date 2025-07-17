@@ -1,0 +1,11 @@
+[gd_scene load_steps=4 format=3 uid="uid://dcigvk35np478"]
+
+[ext_resource type="PackedScene" uid="uid://c34olacatoux1" path="res://Meshes/VATCrow.glb" id="1_5wu22"]
+[ext_resource type="Script" uid="uid://untall642wgg" path="res://Scripts/vat_crow_script.gd" id="2_bf15r"]
+[ext_resource type="Material" uid="uid://bw8up6euwp44j" path="res://Materials/vat_shader_material.tres" id="2_rkgp6"]
+
+[node name="VATCrow" instance=ExtResource("1_5wu22")]
+script = ExtResource("2_bf15r")
+
+[node name="SK_Crow_002" parent="." index="0"]
+material_override = ExtResource("2_rkgp6")

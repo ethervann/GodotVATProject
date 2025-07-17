@@ -1,0 +1,222 @@
+[gd_scene load_steps=11 format=3 uid="uid://vvsugbgiwp2j"]
+
+[ext_resource type="PackedScene" uid="uid://12k0dqn5bwad" path="res://Meshes/AnimCrow1.glb" id="1_rbcco"]
+[ext_resource type="Script" uid="uid://cb66cp7a0u1gl" path="res://Scripts/anim_crow.gd" id="2_ltag8"]
+[ext_resource type="Texture2D" uid="uid://l1ym1c3annl4" path="res://Textures/Albedo/Crow/T_Crow_BaseColor.PNG" id="3_wo0qt"]
+[ext_resource type="Texture2D" uid="uid://cu4xally5vbdx" path="res://Textures/Masks/feathermask.png" id="4_yblh1"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_yblh1"]
+transparency = 1
+depth_draw_mode = 1
+albedo_color = Color(0.488573, 0.276926, 0.786836, 1)
+albedo_texture = ExtResource("3_wo0qt")
+
+[sub_resource type="Shader" id="Shader_yblh1"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	ALPHA = texture(texture_albedo, base_uv).r;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yblh1"]
+render_priority = 0
+shader = SubResource("Shader_yblh1")
+shader_parameter/albedo = Color(0.230371, 0.11548, 0.281323, 1)
+shader_parameter/texture_albedo = ExtResource("4_yblh1")
+shader_parameter/albedo_texture_size = Vector2i(381, 219)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="Shader" id="Shader_wo0qt"]
+code = "// NOTE: Shader automatically converted from Godot Engine 4.4.stable's StandardMaterial3D.
+
+shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_burley, specular_schlick_ggx;
+
+uniform vec4 albedo : source_color;
+uniform sampler2D texture_albedo : source_color, filter_linear_mipmap, repeat_enable;
+uniform ivec2 albedo_texture_size;
+uniform float point_size : hint_range(0.1, 128.0, 0.1);
+
+uniform float roughness : hint_range(0.0, 1.0);
+uniform sampler2D texture_metallic : hint_default_white, filter_linear_mipmap, repeat_enable;
+uniform vec4 metallic_texture_channel;
+uniform sampler2D texture_roughness : hint_roughness_r, filter_linear_mipmap, repeat_enable;
+
+uniform float specular : hint_range(0.0, 1.0, 0.01);
+uniform float metallic : hint_range(0.0, 1.0, 0.01);
+
+uniform vec3 uv1_scale;
+uniform vec3 uv1_offset;
+uniform vec3 uv2_scale;
+uniform vec3 uv2_offset;
+
+void vertex() {
+	UV = UV * uv1_scale.xy + uv1_offset.xy;
+}
+
+void fragment() {
+	vec2 base_uv = UV;
+
+	ALPHA = texture(texture_albedo, base_uv).r;
+
+	vec4 albedo_tex = texture(texture_albedo, base_uv);
+	ALBEDO = albedo.rgb * albedo_tex.rgb;
+
+	float metallic_tex = dot(texture(texture_metallic, base_uv), metallic_texture_channel);
+	METALLIC = metallic_tex * metallic;
+	SPECULAR = specular;
+
+	vec4 roughness_texture_channel = vec4(1.0, 0.0, 0.0, 0.0);
+	float roughness_tex = dot(texture(texture_roughness, base_uv), roughness_texture_channel);
+	ROUGHNESS = roughness_tex * roughness;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gdp6n"]
+render_priority = 0
+shader = SubResource("Shader_wo0qt")
+shader_parameter/albedo = Color(0.230371, 0.11548, 0.281323, 1)
+shader_parameter/texture_albedo = ExtResource("4_yblh1")
+shader_parameter/albedo_texture_size = Vector2i(381, 219)
+shader_parameter/point_size = 1.0
+shader_parameter/roughness = 1.0
+shader_parameter/metallic_texture_channel = Vector4(1, 0, 0, 0)
+shader_parameter/specular = 0.5
+shader_parameter/metallic = 0.0
+shader_parameter/uv1_scale = Vector3(1, 1, 1)
+shader_parameter/uv1_offset = Vector3(0, 0, 0)
+shader_parameter/uv2_scale = Vector3(1, 1, 1)
+shader_parameter/uv2_offset = Vector3(0, 0, 0)
+
+[sub_resource type="SphereMesh" id="SphereMesh_yblh1"]
+material = SubResource("ShaderMaterial_gdp6n")
+radial_segments = 8
+rings = 8
+
+[node name="AnimCrow1" instance=ExtResource("1_rbcco")]
+script = ExtResource("2_ltag8")
+
+[node name="Skeleton3D" parent="root" index="0"]
+bones/0/position = Vector3(-1.13687e-13, 12.9155, -3.24038)
+bones/3/position = Vector3(9.39259, -0.00448418, -1.68156e-07)
+bones/3/rotation = Quaternion(-1.49015e-08, 1.61351e-09, -7.45056e-09, 1)
+bones/4/rotation = Quaternion(3.97566e-08, 3.97978e-07, -0.100333, 0.994954)
+bones/5/position = Vector3(1.12597, 1.6311, -1.47027e-06)
+bones/5/rotation = Quaternion(-1.46979e-07, -1.7016e-06, 0.581923, 0.813244)
+bones/6/rotation = Quaternion(0.71297, -0.000284855, 0.701195, 0.000278194)
+bones/7/rotation = Quaternion(-0.134932, 0.641696, 0.211114, 0.72488)
+bones/8/rotation = Quaternion(6.69458e-08, -9.36365e-09, -0.976058, 0.217509)
+bones/9/rotation = Quaternion(-0.0537341, -0.612192, 0.786907, 0.0557816)
+bones/10/position = Vector3(15.5301, -0.858757, -1.42347)
+bones/11/position = Vector3(26.4583, 0.138318, 2.94051)
+bones/12/position = Vector3(13.5197, 0.335071, 3.3774)
+bones/13/position = Vector3(14.0626, -0.434252, -0.720568)
+bones/13/rotation = Quaternion(-0.69122, -0.0825289, 0.319697, 0.642804)
+bones/14/position = Vector3(0.999014, 1.42482, -0.857459)
+bones/15/position = Vector3(-1.0961, -2.93645, 0.481992)
+bones/15/rotation = Quaternion(-0.100867, 0.0438769, -0.993639, 0.0241399)
+bones/16/position = Vector3(9.96175, -0.265955, -0.266019)
+bones/17/position = Vector3(11.9718, 2.07647, -1.32637)
+bones/18/rotation = Quaternion(0.71297, -0.000282981, -0.701195, -0.000280246)
+bones/19/rotation = Quaternion(0.134933, -0.641695, 0.211114, 0.72488)
+bones/20/rotation = Quaternion(4.66042e-08, -3.1115e-08, -0.976058, 0.217509)
+bones/21/rotation = Quaternion(0.0537341, 0.612192, 0.786907, 0.0557816)
+bones/22/position = Vector3(15.7841, -0.37982, 2.46804)
+bones/23/position = Vector3(13.5183, 0.307553, -3.36991)
+bones/24/position = Vector3(25.558, 0.251936, -2.21701)
+bones/25/position = Vector3(14.0612, -0.440311, 0.731593)
+bones/25/rotation = Quaternion(0.944483, 0.258665, 0.185115, -0.0823247)
+bones/26/position = Vector3(0.993923, 1.40268, 0.897705)
+bones/27/position = Vector3(11.9757, 2.05853, 1.29381)
+bones/27/rotation = Quaternion(0.809824, 0.555571, -0.0188583, 0.18754)
+bones/28/position = Vector3(9.96145, -0.264561, 0.268526)
+bones/29/position = Vector3(-1.09506, -2.94122, -0.490654)
+bones/29/rotation = Quaternion(-0.0911627, 0.960908, -0.244443, 0.092699)
+bones/30/rotation = Quaternion(-0.135249, 0.694051, -0.686184, 0.170742)
+bones/31/rotation = Quaternion(-0.13829, 0.684759, -0.696298, 0.164771)
+bones/32/rotation = Quaternion(-0.12865, 0.695304, -0.684531, 0.177253)
+bones/33/rotation = Quaternion(0.155225, -0.680955, 0.699714, -0.150353)
+bones/34/rotation = Quaternion(0.173644, -0.685454, 0.694619, -0.132309)
+bones/35/rotation = Quaternion(-0.145506, 0.691973, -0.688636, 0.160568)
+bones/36/rotation = Quaternion(0.159223, -0.688946, 0.691689, -0.146856)
+bones/37/rotation = Quaternion(0.159572, -0.688866, 0.691764, -0.146506)
+bones/38/rotation = Quaternion(0.169186, -0.686568, 0.693744, -0.136821)
+bones/39/rotation = Quaternion(0.160354, -0.688684, 0.692127, -0.144782)
+bones/40/rotation = Quaternion(0.719048, 0.694585, 0.0222363, -0.00531028)
+bones/41/rotation = Quaternion(4.16593e-09, 5.76974e-08, -0.46112, 0.887338)
+bones/42/rotation = Quaternion(3.42794e-08, -8.25899e-08, 0.497616, 0.867398)
+bones/43/rotation = Quaternion(0.0152712, -0.0170106, -0.277264, 0.960522)
+bones/44/rotation = Quaternion(-7.31998e-06, 2.81503e-06, 0.707107, 0.707107)
+bones/45/rotation = Quaternion(5.06528e-08, 5.4844e-08, -2.65426e-08, 1)
+bones/46/rotation = Quaternion(9.14824e-14, -1.80078e-13, 5.44824e-08, 1)
+bones/47/rotation = Quaternion(-0.707107, 0.707107, 4.234e-06, 8.55799e-06)
+bones/48/rotation = Quaternion(9.95959e-08, -8.2874e-09, 4.0047e-08, 1)
+bones/49/rotation = Quaternion(1.73445e-13, 5.95995e-08, 4.00469e-08, 1)
+bones/50/rotation = Quaternion(0.719049, 0.694584, -0.0222389, 0.00531628)
+bones/51/rotation = Quaternion(1.57445e-08, -4.79764e-08, -0.461131, 0.887332)
+bones/52/rotation = Quaternion(-6.78459e-09, -9.53239e-08, 0.497627, 0.867391)
+bones/53/rotation = Quaternion(-0.0152723, 0.0170102, -0.277266, 0.960521)
+bones/54/rotation = Quaternion(-1.22419e-07, 1.1985e-05, 0.707107, 0.707107)
+bones/55/rotation = Quaternion(3.65691e-08, 3.6566e-08, 5.99226e-14, 1)
+bones/56/rotation = Quaternion(-1.15463e-14, -7.80098e-13, 5.40167e-08, 1)
+bones/57/rotation = Quaternion(0.707107, -0.707107, -5.13575e-06, 6.57273e-06)
+bones/59/rotation = Quaternion(-7.63833e-14, 1.61005e-12, -4.05125e-08, 1)
+
+[node name="SK_Crow_003" parent="root/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_yblh1")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="." index="2"]
+material_override = SubResource("ShaderMaterial_yblh1")
+emitting = false
+amount = 1
+process_material = SubResource("ShaderMaterial_yblh1")
+draw_pass_1 = SubResource("SphereMesh_yblh1")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_finished"]

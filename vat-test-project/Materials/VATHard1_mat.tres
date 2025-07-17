@@ -1,0 +1,10 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://dou45ux6fmxtd"]
+
+[ext_resource type="Shader" uid="uid://c14bxrhjcabhp" path="res://Shaders/vat_shader.gdshader" id="1_xoab3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_xoab3")
+shader_parameter/scale = 2.73
+shader_parameter/tex_width = 8.0
+shader_parameter/tex_height = 10.0

@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b8ydjstclox0f"]
+
+[ext_resource type="Script" uid="uid://bjn6x0mw670m4" path="res://Scripts/rock.gd" id="1_lgx4v"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_yob6v"]
+radius = 0.2
+height = 0.4
+radial_segments = 6
+rings = 4
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_lgx4v"]
+radius = 0.2
+
+[node name="Rock" type="RigidBody3D"]
+continuous_cd = true
+contact_monitor = true
+max_contacts_reported = 1
+script = ExtResource("1_lgx4v")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.999637, -0.0227987, 0.014391, 0.0229769, 0.99966, -0.0123406, -0.0141047, 0.0126667, 0.99982, 0, 0, 0)
+mesh = SubResource("SphereMesh_yob6v")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_lgx4v")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

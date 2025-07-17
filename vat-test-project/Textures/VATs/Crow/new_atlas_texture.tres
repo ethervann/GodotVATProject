@@ -1,0 +1,9 @@
+[gd_resource type="AtlasTexture" load_steps=2 format=3 uid="uid://buy7e8m4lo6d8"]
+
+[ext_resource type="Texture2D" uid="uid://baqxqr7ylohom" path="res://Textures/VATs/Crow/crow atlas.png" id="1_vf747"]
+
+[resource]
+resource_local_to_scene = true
+atlas = ExtResource("1_vf747")
+region = Rect2(0, 22, 1500, 107)
+filter_clip = true

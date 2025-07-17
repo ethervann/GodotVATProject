@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://bhwcvswdio8tn"]
+
+[ext_resource type="Material" uid="uid://bw8up6euwp44j" path="res://Materials/vat_shader_material.tres" id="1_lbv83"]
+
+[node name="Cube2"]
+
+[node name="Cube" parent="." index="0"]
+transform = Transform3D(0.999999, 0.00106862, -5.69682e-05, -0.00106859, 0.999999, 0.000513218, 5.75252e-05, -0.000513156, 1, -0.00359976, -0.972321, 0.0265691)
+material_override = ExtResource("1_lbv83")
