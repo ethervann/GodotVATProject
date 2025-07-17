@@ -1,9 +1,12 @@
 class_name CrowHandler extends Node
 
+enum RavenType {VAT, Skeletal}
+
 @export var area_size : int = 100
 @export var segment_size : int = 1
 
 @export var crows_per_segment : int = 1
+@export var crow_to_spawn : RavenType
 
 var segments = Array()
 var crows = Array()
@@ -24,7 +27,15 @@ func ping(location : Vector3) -> void:
 	print("Pinged in " + str(float(msD)/1000000.0) + "ms.")
 
 func spawn_crow(i : int, xpos : float, ypos : float, zpos : float):
-	var crow = vat_crow_scene.instantiate() #anim_crow_scene for skeletal-based, vat_crow_scene for VAT-based
+	
+	var crow
+	
+	match (crow_to_spawn):
+		RavenType.VAT:
+			crow = vat_crow_scene.instantiate()
+		RavenType.Skeletal:
+			crow = anim_crow_scene.instantiate()
+	
 	self.add_child(crow)
 	crows[i] = crow
 	crow.global_position = Vector3(xpos, ypos, zpos)
@@ -43,8 +54,8 @@ func initialize_segments() -> void:
 
 	for i in range(segment_count):
 		segments[i] = Segment.new()
-		segments[i].xpos = i % side_count + (segment_size/2) - area_size/2
-		segments[i].zpos = i / side_count + (segment_size/2) - area_size/2
+		segments[i].xpos = i % side_count + (half_seg) - area_size/2
+		segments[i].zpos = i / side_count + (half_seg) - area_size/2
 
 		for x in range(crows_per_segment):
 			spawn_crow(c_count, segments[i].xpos + randf_range(-half_seg, half_seg), 0.0, segments[i].zpos + randf_range(-half_seg, half_seg))

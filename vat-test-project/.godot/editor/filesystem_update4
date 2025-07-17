@@ -1,0 +1,8 @@
+res://Scenes/DemoLevel.tscn
+res://Scripts/crow_handler.gd
+res://DemoScenes/10000VAT.tscn
+res://DemoScenes/100VAT.tscn
+res://DemoScenes/1000VAT.tscn
+res://DemoScenes/100Skeletal.tscn
+res://DemoScenes/1000Skeletal.tscn
+res://DemoScenes/10000Skeletal.tscn

@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://b1lguqpaiwlrx"]
+
+[ext_resource type="PackedScene" uid="uid://b6jax2xrvi0gd" path="res://Scenes/player.tscn" id="1_6w8qw"]
+[ext_resource type="PackedScene" uid="uid://bnfv8p4nueajk" path="res://Scenes/CrowHandler.tscn" id="2_5lm8y"]
+[ext_resource type="Texture2D" uid="uid://by03hnh41onyy" path="res://Textures/Albedo/Texturelabs_Brick_122S.jpg" id="3_3ors1"]
+[ext_resource type="Material" uid="uid://bse4jdd610urv" path="res://Materials/simple_texture_mat.tres" id="4_y1xq8"]
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_37m1x"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0ivf7"]
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_3ors1")
+uv1_scale = Vector3(250, 500, 500)
+distance_fade_mode = 2
+distance_fade_min_distance = 200.0
+distance_fade_max_distance = 100.0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_8723o"]
+size = Vector2(1000, 1000)
+
+[node name="DemoLevel" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.620737, -0.660144, 0.42296, 0, 0.539476, 0.842001, -0.784019, -0.522661, 0.334873, 3.2031, 2.93427, 3.08822)
+
+[node name="Player" parent="." instance=ExtResource("1_6w8qw")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.820023, 0.555202, 0.0289415)
+visible = false
+
+[node name="CrowHandler" parent="." instance=ExtResource("2_5lm8y")]
+unique_name_in_owner = true
+area_size = 10
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_37m1x")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+material_override = SubResource("StandardMaterial3D_0ivf7")
+mesh = SubResource("PlaneMesh_8723o")
+surface_material_override/0 = ExtResource("4_y1xq8")
